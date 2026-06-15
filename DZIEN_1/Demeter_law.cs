@@ -10,6 +10,19 @@ namespace Demeter_law
     {
         static void Main(string[] args)
         {
+            var miasto = new Miasto("Lublin");
+            var adres = new Adres("ul. Główna 1", miasto);
+            var obywatel = new Obywatel("Jan", "Kowalski", adres);
+            var sprawa = new Sprawa("ZUS/123/2023", obywatel);
+            
+            //Opcja która łamie prawo Demeter
+            string nazwaMiastaZle = sprawa.Obywatel.Adres.Miasto.Nazwa;
+            Console.WriteLine($"Nazwa miasta (zła opcja): {nazwaMiastaZle}");
+
+            Console.WriteLine("____________________________________");
+
+            string nazwaMiastaDobrze = sprawa.PobierzMiastoObywatela();
+            Console.WriteLine($"Miasto obywatela: {nazwaMiastaDobrze}");
         }
     }
 
